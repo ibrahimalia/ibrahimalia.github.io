@@ -67,7 +67,7 @@ const mePage: IMe = {
   experience: [
     { company: "MID FRONTEND ENGINEERING", position: "Divcodes (2022-now)" },
     {
-      company: "JUNIOR FULL STACK DEVELOPER",
+      company: "MID FRONTEND ENGINEERING",
       position: "Qtech Group (2021-2022)",
     },
   ],
