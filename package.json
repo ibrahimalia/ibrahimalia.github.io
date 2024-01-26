@@ -1,10 +1,14 @@
 {
-  "name": "portfolio",
+  "name": "ibrahimalia.github.io",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://ibrahimalia.github.io",
   "scripts": {
     "dev": "vite",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
+    "clean": "gh-pages-clean",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
@@ -15,6 +19,7 @@
     "autoprefixer": "^10.4.16",
     "classnames": "^2.5.1",
     "framer-motion": "^10.16.16",
+    "gh-pages": "^6.1.1",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
     "postcss": "^8.4.31",

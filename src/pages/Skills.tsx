@@ -75,6 +75,7 @@ const Skills = () => {
             className="w-full h-full"
           />
         </div>
+        
         <div className="container mx-auto w-[400px] mix-blend-color-dodge absolute -left-[70px] bottom-0 animate-pulse duration-75 rotate-12">
           <motion.img
             variants={fadeIn("up", 0.3)}
