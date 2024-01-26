@@ -68,7 +68,7 @@ const Skills = () => {
             initial="hidden"
             animate="show"
             exit="hidden"
-            src="/public/circles.png"
+            src="/circles.png"
             alt="circle"
             width={200}
             height={200}
@@ -81,7 +81,7 @@ const Skills = () => {
             initial="hidden"
             animate="show"
             exit="hidden"
-            src="/public/bulb.png"
+            src="/bulb.png"
             width={737}
             height={678}
             className="w-full h-full"
@@ -100,7 +100,7 @@ const Skills = () => {
               {skillsPage.map((item) => (
                 <div className="min-h-[250px]">
                   <div
-                    className={`progress ${item.rate<=50?'less':''}`}
+                    className={`progress ${item.rate <= 50 ? "less" : ""}`}
                     style={
                       { "--i": item.rate, "--clr": item.color } as CSSProperties
                     }

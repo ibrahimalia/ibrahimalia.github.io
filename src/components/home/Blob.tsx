@@ -19,7 +19,7 @@ const Blob = () => {
         className="absolute cursor-pointer left-[220px] top-[350px] xl:left-[270px] xl:top-[55%] w-[100px] h-[100px] xl:w-[185px] xl:h-[185px] flex items-center justify-center xl:bg-circleStar xl:bg-cover xl:bg-no-repeat group "
       >
         <img
-          src="/public/rounded-text.png"
+          src="/rounded-text.png"
           alt="projects"
           width={141}
           height={148}

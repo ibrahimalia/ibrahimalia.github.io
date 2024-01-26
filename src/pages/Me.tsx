@@ -20,7 +20,7 @@ const Me = () => {
             initial="hidden"
             animate="show"
             exit="hidden"
-            src="/public/circles.png"
+            src="/circles.png"
             alt="circle"
             width={200}
             height={200}
