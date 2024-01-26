@@ -1,0 +1,128 @@
+.home .type-writer {
+  overflow: hidden;
+}
+.home .type-writer .text {
+  position: relative;
+  font-weight: 600;
+}
+
+.home .type-writer .text.first-text {
+  color: white;
+  margin-right: 5px;
+}
+
+.home .type-writer .text.sec-text::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: #3e253d;
+  border-left: 2px solid rgb(255, 55, 0);
+  animation: animate 4s steps(15) infinite;
+}
+
+@media screen and (max-width: 1188px) {
+  .home .type-writer .text.sec-text::before {
+    background: #1A1734;
+  }
+}
+
+
+@keyframes animate {
+  40%,
+  60% {
+    left: 100%;
+  }
+  100% {
+    left: 0%;
+  }
+}
+
+.home .wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.home .box div {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background-color: transparent;
+  border: 6px solid rgba(255, 255, 255, 0.8);
+}
+
+.home .box div:nth-child(1) {
+  top: 12%;
+  left: 42%;
+  animation: backgroundAnimation 10s linear infinite;
+}
+
+.home .box div:nth-child(2) {
+  top: 70%;
+  left: 50%;
+  animation: backgroundAnimation 7s linear infinite;
+}
+.home .box div:nth-child(3) {
+  top: 17%;
+  left: 6%;
+  animation: backgroundAnimation 9s linear infinite;
+}
+
+.home .box div:nth-child(4) {
+  top: 20%;
+  left: 60%;
+  animation: backgroundAnimation 10s linear infinite;
+}
+
+.home .box div:nth-child(5) {
+  top: 67%;
+  left: 10%;
+  animation: backgroundAnimation 6s linear infinite;
+}
+
+.home .box div:nth-child(6) {
+  top: 80%;
+  left: 70%;
+  animation: backgroundAnimation 12s linear infinite;
+}
+
+.home .box div:nth-child(7) {
+  top: 60%;
+  left: 80%;
+  animation: backgroundAnimation 15s linear infinite;
+}
+
+.home .box div:nth-child(8) {
+  top: 32%;
+  left: 25%;
+  animation: backgroundAnimation 16s linear infinite;
+}
+
+.home .box div:nth-child(9) {
+  top: 90%;
+  left: 25%;
+  animation: backgroundAnimation 9s linear infinite;
+}
+
+.home .box div:nth-child(10) {
+  top: 20%;
+  left: 80%;
+  animation: backgroundAnimation 5s linear infinite;
+}
+
+@keyframes backgroundAnimation {
+  0% {
+    transform: scale(0) translateY(-90px) rotate(360deg);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1.3) translateY(-90px) rotate(-180deg);
+    border-radius: 50%;
+    opacity: 0;
+  }
+}
