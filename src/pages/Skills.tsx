@@ -12,11 +12,11 @@ const Skills = () => {
   const settings: Settings = {
     dots: false,
     slidesToShow: 5,
-    slidesToScroll: 1,
+    slidesToScroll: 5,
     infinite: true,
     arrows: false,
     autoplay: true,
-    speed: 2000,
+    speed: 1000,
     responsive: [
       {
         breakpoint: 1024,
