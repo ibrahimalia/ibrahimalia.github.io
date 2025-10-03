@@ -126,7 +126,7 @@ const Projects = () => {
           </Slide>
         </div>
 
-        <div className="container mx-auto scroll-container h-[370px] md:h-[600px] w-full">
+        <div className="container mx-auto scroll-container h-[100vh] md:h-[100vh] w-full pb-[200px] ">
           {projectsPage.map(([project1, project2]) => (
             <div className="">
               <div className="grid grid-cols-1 lg:grid-cols-2 h-full p-2 gap-2">
