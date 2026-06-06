@@ -1,32 +1,45 @@
-import { homePage } from "@db";
-import { useEffect, useRef } from "react";
-import Zoom from "react-reveal/Zoom";
+import { useState, useEffect } from "react";
+
+const roles = [
+  "Frontend Engineer",
+  "React Specialist",
+  "UI/UX Enthusiast",
+  "TypeScript Expert",
+  "Full-Stack Developer",
+];
 
 const TypeWriter = () => {
-  const ref = useRef<HTMLSpanElement | null>(null);
+  const [text, setText] = useState("");
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+
   useEffect(() => {
-    let x = 1;
-    setInterval(() => {
-      if (ref.current) {
-        ref.current.textContent = homePage.texts[x];
-      }
-      if (x < 16) {
-        x++;
+    const current = roles[roleIndex];
+    let timer: ReturnType<typeof setTimeout> | null = null;
+
+    if (!isDeleting) {
+      if (text.length < current.length) {
+        timer = setTimeout(() => setText(current.slice(0, text.length + 1)), 75);
       } else {
-        x = 0;
+        timer = setTimeout(() => setIsDeleting(true), 2000);
       }
-    }, 4000);
-  }, []);
+    } else {
+      if (text.length > 0) {
+        timer = setTimeout(() => setText(text.slice(0, -1)), 45);
+      } else {
+        setIsDeleting(false);
+        setRoleIndex((i) => (i + 1) % roles.length);
+      }
+    }
+
+    return () => { if (timer) clearTimeout(timer); };
+  }, [text, isDeleting, roleIndex]);
+
   return (
-    <div className="type-writer absolute xl:left-[100px] xl:top-[30%] z-50">
-      <Zoom>
-        <div className="text-[40px] font-bold uppercase">{homePage.name}</div>
-      </Zoom>
-      <span ref={ref} className="text sec-text text-[#57565f] xl:!text-xl">
-        {" "}
-        I am a Software Engineer
-      </span>
-    </div>
+    <span className="typewriter-role">
+      {text}
+      <span className="typewriter-cursor" />
+    </span>
   );
 };
 

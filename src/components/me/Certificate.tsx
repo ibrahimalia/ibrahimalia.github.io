@@ -1,44 +1,54 @@
 import { motion } from "framer-motion";
-import { fadeIn } from "../../utils";
 import { mePage } from "@db";
+import { IoRibbonOutline, IoOpenOutline } from "react-icons/io5";
+
+const stagger = {
+  hidden: { opacity: 0 },
+  show: { opacity: 1, transition: { staggerChildren: 0.09 } },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 12 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.25, 0.25, 0.25, 0.75] } },
+};
 
 const Certificate = () => {
   return (
     <motion.div
-      variants={fadeIn("up", 0.3)}
+      variants={stagger}
       initial="hidden"
       animate="show"
-      exit="hidden"
+      className="me-cert-list"
     >
-      <table className="w-full text-xs table-auto  uppercase text-gray-400">
-        <thead>
-          <tr className=" rounded-xl">
-            <th className="text-start p-2 border-b border-gray-500">Name</th>
-            <th className="text-start p-2 border-b border-gray-500">source</th>
-          </tr>
-        </thead>
-        <tbody>
-          {mePage.certificate.map((item) => (
-            <tr key={item.name}>
-              <td className="text-start p-2 border-b border-gray-500">
-                {item.name}
-              </td>
-              <td className="text-start p-2 border-b border-gray-500">
-                {item.source}
-                {item.link && (
-                  <a
-                    className="text-accent pl-2 underline"
-                    target="_blank"
-                    href={`${item.link}`}
-                  >
-                    link here
-                  </a>
-                )}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      {mePage.certificate.map((cert) => (
+        <motion.div key={cert.name} variants={item} className="me-cert-card">
+          {/* Icon */}
+          <div className="me-cert-icon">
+            <IoRibbonOutline />
+          </div>
+
+          {/* Content */}
+          <div className="flex-1 min-w-0">
+            <div className="text-white text-xs font-semibold uppercase tracking-wide leading-none">
+              {cert.name}
+            </div>
+            <div className="text-white/45 text-[0.68rem] mt-1 leading-relaxed">
+              {cert.source}
+            </div>
+            {cert.link && (
+              <a
+                href={cert.link}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1 text-accent text-[0.65rem] font-semibold mt-1.5 hover:underline transition-opacity hover:opacity-80"
+              >
+                View Certificate
+                <IoOpenOutline size={11} />
+              </a>
+            )}
+          </div>
+        </motion.div>
+      ))}
     </motion.div>
   );
 };
