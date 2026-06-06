@@ -9,6 +9,8 @@ import { projectsPage } from "@db";
 import { useState } from "react";
 import { TiltCard } from "@components";
 
+const CIRCUMFERENCE = 2 * Math.PI * 38;
+
 /* ── Slider arrow buttons ── */
 const SliderArrow = ({
   direction,
@@ -36,7 +38,7 @@ const SliderArrow = ({
 /* ── Framer Motion variants ── */
 const stagger = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.07, delayChildren: 0.1 } },
+  show: { transition: { staggerChildren: 0.09, delayChildren: 0.15 } },
 };
 
 const cardItem = {
@@ -52,9 +54,14 @@ const Projects = () => {
   const [activeDot, setActiveDot] = useState(0);
   const [SliderModal, { open }] = useModal();
   const [idSelected, setIdSelected] = useState<number | null>(null);
+  const [loadedImages, setLoadedImages] = useState<Set<number>>(new Set());
 
   const allProjects = projectsPage.flat();
   const selectedProject = allProjects.find((p) => p.id === idSelected);
+
+  const handleImageLoad = (id: number) => {
+    setLoadedImages((prev) => new Set(prev).add(id));
+  };
 
   const sliderSettings: Settings = {
     dots: true,
@@ -94,7 +101,7 @@ const Projects = () => {
         <div className="p-6">
           <div className="flex items-center justify-between mb-5 pr-8">
             <div>
-              <p className="text-white/35 text-[0.62rem] font-semibold uppercase tracking-[0.18em] mb-1">
+              <p className="text-white/35 text-[0.78rem] font-semibold uppercase tracking-[0.18em] mb-1">
                 Gallery
               </p>
               <h3 className="text-white font-bold text-lg capitalize leading-none">
@@ -130,7 +137,9 @@ const Projects = () => {
 
       {/* ── Page ── */}
       <div className="h-full bg-primary relative overflow-hidden">
+        {/* Background effects */}
         <div className="proj-dot-grid absolute inset-0 z-0 pointer-events-none" />
+
         <motion.div
           className="proj-aurora-cyan absolute z-0 pointer-events-none"
           animate={{ scale: [1, 1.15, 1], opacity: [0.7, 1, 0.7] }}
@@ -141,97 +150,177 @@ const Projects = () => {
           animate={{ scale: [1, 1.18, 1], opacity: [0.65, 1, 0.65] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
         />
+        <motion.div
+          className="proj-aurora-amber absolute z-0 pointer-events-none"
+          animate={{ scale: [1, 1.12, 1], opacity: [0.6, 0.9, 0.6] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 4 }}
+        />
 
+        <div className="proj-light-beam-1 absolute z-0 pointer-events-none" />
+        <div className="proj-light-beam-2 absolute z-0 pointer-events-none" />
+
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+          {[...Array(12)].map((_, i) => (
+            <span key={i} className="proj-particle" />
+          ))}
+        </div>
+
+        <div className="proj-noise absolute inset-0 z-0 pointer-events-none" />
+
+        {/* Content */}
         <div className="relative z-10 h-full flex flex-col scroll-container">
-          {/* ── Page header ── */}
+          {/* Page header */}
           <div className="container mx-auto pt-10 pb-8">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: [0.25, 0.25, 0.25, 0.75] }}
             >
-              <p className="text-white/35 text-xs font-medium uppercase tracking-[0.22em] mb-2">
+              <p className="text-white/35 text-sm font-medium uppercase tracking-[0.22em] mb-2">
                 Portfolio
               </p>
               <h1 className="text-4xl xl:text-5xl font-bold text-white">
                 My <span className="proj-title-accent">Projects</span>
               </h1>
               <div className="proj-divider mt-3" />
-              <p className="text-white/40 text-sm mt-3 max-w-md">
+              <p className="text-white/40 text-base mt-3 max-w-md">
                 A selection of real-world applications I've designed and built.
               </p>
             </motion.div>
           </div>
 
-          {/* ── Project grid ── */}
+          {/* Project grid */}
           <div className="container mx-auto pb-24">
             <motion.div
-              className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5"
+              className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
               variants={stagger}
               initial="hidden"
               animate="show"
             >
-              {allProjects.map((project) => (
-                <TiltCard key={project.id} maxTilt={7} perspective={900}>
-                  <motion.div variants={cardItem} className="proj-card group">
-                    {/* Image + hover overlay */}
-                    <div className="proj-card-img-wrap">
-                      <img
-                        src={project.main_image}
-                        alt={project.name}
-                        className="proj-card-img"
-                      />
-                      <div className="proj-card-overlay">
-                        <div className="proj-card-info">
-                          <div className="proj-card-name">{project.name}</div>
-                          <p className="proj-card-desc">{project.short_description}</p>
-                          <div className="proj-tech-row">
-                            {project.languages.map((_path, i) => (
-                              <div key={i} className="proj-tech-icon">
-                                <svg
-                                  stroke="white"
-                                  fill="white"
-                                  strokeWidth="0"
-                                  role="img"
-                                  viewBox="0 0 30 30"
-                                  height="1em"
-                                  width="1em"
-                                >
-                                  {project.languages[i]}
-                                </svg>
-                              </div>
-                            ))}
-                          </div>
-                          <div className="proj-actions">
-                            <a
-                              href={project.link}
-                              target="_blank"
-                              rel="noreferrer"
-                              className="proj-btn-live"
-                            >
-                              <FaEye size={11} /> Live
-                            </a>
-                            <button
-                              className="proj-btn-gallery"
-                              onClick={() => {
-                                setActiveDot(0);
-                                setIdSelected(project.id);
-                                open();
+              {allProjects.map((project, index) => {
+                const isLoaded = loadedImages.has(project.id);
+                return (
+                  <TiltCard key={project.id} maxTilt={6} perspective={900}>
+                    <motion.div variants={cardItem} className="proj-card">
+                      {/* Badge */}
+                      <div className="proj-card-badge">Case Study</div>
+
+                      {/* Media area: ring loader + image */}
+                      <div className="proj-card-media">
+                        {/* Ring loader (visible until image loads) */}
+                        <div
+                          className="proj-ring-area"
+                          style={{ opacity: isLoaded ? 0 : 1 }}
+                        >
+                          <div className="proj-ring-glow" />
+                          <svg
+                            viewBox="0 0 100 100"
+                            className="proj-ring-svg"
+                            style={{ animationDelay: `${index * -1.5}s` }}
+                          >
+                            <defs>
+                              <linearGradient
+                                id={`projGrad${project.id}`}
+                                x1="0%"
+                                y1="0%"
+                                x2="100%"
+                                y2="100%"
+                              >
+                                <stop offset="0%" stopColor="#06b6d4" />
+                                <stop offset="100%" stopColor="#22c55e" />
+                              </linearGradient>
+                            </defs>
+                            <circle
+                              cx="50"
+                              cy="50"
+                              r="38"
+                              className="proj-ring-track"
+                            />
+                            <motion.circle
+                              cx="50"
+                              cy="50"
+                              r="38"
+                              className="proj-ring-progress"
+                              stroke={`url(#projGrad${project.id})`}
+                              strokeDasharray={CIRCUMFERENCE}
+                              initial={{ strokeDashoffset: CIRCUMFERENCE }}
+                              animate={{ strokeDashoffset: CIRCUMFERENCE * 0.22 }}
+                              transition={{
+                                duration: 1.6,
+                                delay: 0.3 + index * 0.1,
+                                ease: [0.25, 0.1, 0.25, 1],
                               }}
-                            >
-                              <FaRegImages size={11} /> Gallery
-                            </button>
-                          </div>
+                            />
+                          </svg>
+                        </div>
+
+                        {/* Image (fades in when loaded) */}
+                        <img
+                          src={project.main_image}
+                          alt={project.name}
+                          className={`proj-card-img ${isLoaded ? "loaded" : ""}`}
+                          onLoad={() => handleImageLoad(project.id)}
+                        />
+                      </div>
+
+                      {/* Divider */}
+                      <div className="proj-card-divider" />
+
+                      {/* Info */}
+                      <h3 className="proj-card-name">{project.name}</h3>
+                      <div className="proj-card-desc-wrap">
+                        <p className="proj-card-desc">
+                          {project.short_description}
+                        </p>
+                        <div className="proj-card-tooltip">
+                          {project.short_description}
                         </div>
                       </div>
-                    </div>
-                    {/* Footer */}
-                    <div className="proj-card-footer">
-                      <span className="proj-card-footer-name">{project.name}</span>
-                    </div>
-                  </motion.div>
-                </TiltCard>
-              ))}
+
+                      {/* Tech icons */}
+                      <div className="proj-tech-row">
+                        {project.languages.map((_path, i) => (
+                          <div key={i} className="proj-tech-icon">
+                            <svg
+                              stroke="white"
+                              fill="white"
+                              strokeWidth="0"
+                              role="img"
+                              viewBox="0 0 30 30"
+                              height="1em"
+                              width="1em"
+                            >
+                              {project.languages[i]}
+                            </svg>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Actions */}
+                      <div className="proj-actions">
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="proj-btn-live"
+                        >
+                          <FaEye size={13} /> Live Preview
+                        </a>
+                        <button
+                          className="proj-btn-gallery"
+                          onClick={() => {
+                            setActiveDot(0);
+                            setIdSelected(project.id);
+                            open();
+                          }}
+                        >
+                          <FaRegImages size={13} /> View Gallery
+                        </button>
+                      </div>
+                    </motion.div>
+                  </TiltCard>
+                );
+              })}
             </motion.div>
           </div>
         </div>

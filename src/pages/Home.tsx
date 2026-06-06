@@ -70,10 +70,29 @@ function Home() {
         style={{ x: o3x, y: o3y }}
       />
 
+      {/* Light beams */}
+      <div className="home-light-beam-1 absolute z-0 pointer-events-none" />
+      <div className="home-light-beam-2 absolute z-0 pointer-events-none" />
+
+      {/* Floating particles */}
+      <div className="home-particles absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        {[...Array(15)].map((_, i) => (
+          <span key={i} className="home-particle" />
+        ))}
+      </div>
+
+      {/* Film grain */}
+      <div className="home-noise absolute inset-0 z-0 pointer-events-none" />
+
       <LoaderLayout>
-        <div className="relative z-10 h-full flex items-center">
+        <div className="relative z-10 min-h-full flex items-start xl:items-center pt-8 pb-28 xl:py-0">
           <div className="container mx-auto">
-            <div className="grid grid-cols-1 xl:grid-cols-2 gap-12 xl:gap-6 items-center">
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 xl:gap-6 items-center">
+
+              {/* ─── Profile Card (shows first on mobile) ─── */}
+              <div className="flex justify-center xl:hidden items-center order-first">
+                <Blob />
+              </div>
 
               {/* ─── Left: Hero Content ─── */}
               <motion.div
@@ -92,10 +111,10 @@ function Home() {
 
                 {/* Greeting + Name */}
                 <motion.div variants={item}>
-                  <p className="text-white/40 text-xs font-medium uppercase tracking-[0.2em] mb-2">
+                  <p className="text-white/40 text-sm font-medium uppercase tracking-[0.2em] mb-2">
                     Hello, I'm
                   </p>
-                  <h1 className="text-5xl xl:text-[5.25rem] font-bold leading-none tracking-tight">
+                  <h1 className="text-[2.5rem] sm:text-5xl xl:text-[5.25rem] font-bold leading-none tracking-tight">
                     <span className="home-heading-gradient capitalize">
                       {homePage.name}
                     </span>
@@ -107,7 +126,7 @@ function Home() {
                   variants={item}
                   className="flex items-center gap-2 justify-center xl:justify-start h-8 overflow-hidden"
                 >
-                  <span className="text-white/40 text-base font-light whitespace-nowrap">I'm a</span>
+                  <span className="text-white/40 text-lg font-light whitespace-nowrap">I'm a</span>
                   <TypeWriter />
                 </motion.div>
 
@@ -119,7 +138,7 @@ function Home() {
                 {/* Description */}
                 <motion.p
                   variants={item}
-                  className="text-white/50 text-sm xl:text-[0.95rem] max-w-[420px] mx-auto xl:mx-0 leading-relaxed"
+                  className="text-white/50 text-base xl:text-[1.05rem] max-w-[420px] mx-auto xl:mx-0 leading-relaxed"
                 >
                   Crafting exceptional digital experiences with modern web technologies.
                   Specialized in React, TypeScript, and scalable frontend architectures
@@ -182,7 +201,7 @@ function Home() {
                 </motion.div>
               </motion.div>
 
-              {/* ─── Right: Profile Card ─── */}
+              {/* ─── Right: Profile Card (desktop only) ─── */}
               <div className="hidden xl:flex justify-end items-center">
                 <Blob />
               </div>

@@ -29,10 +29,10 @@ const Certificate = () => {
 
           {/* Content */}
           <div className="flex-1 min-w-0">
-            <div className="text-white text-xs font-semibold uppercase tracking-wide leading-none">
+            <div className="text-white text-sm font-semibold uppercase tracking-wide leading-none">
               {cert.name}
             </div>
-            <div className="text-white/45 text-[0.68rem] mt-1 leading-relaxed">
+            <div className="text-white/45 text-[0.85rem] mt-1 leading-relaxed">
               {cert.source}
             </div>
             {cert.link && (
@@ -40,7 +40,7 @@ const Certificate = () => {
                 href={cert.link}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-1 text-accent text-[0.65rem] font-semibold mt-1.5 hover:underline transition-opacity hover:opacity-80"
+                className="inline-flex items-center gap-1 text-accent text-[0.78rem] font-semibold mt-1.5 hover:underline transition-opacity hover:opacity-80"
               >
                 View Certificate
                 <IoOpenOutline size={11} />

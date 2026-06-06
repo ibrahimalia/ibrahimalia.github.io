@@ -29,7 +29,7 @@ const IntroSection = () => {
     >
       {/* Badge */}
       <motion.div variants={item}>
-        <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[0.65rem] font-semibold uppercase tracking-widest border border-accent/25 text-accent bg-accent/[0.07]">
+        <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[0.78rem] font-semibold uppercase tracking-widest border border-accent/25 text-accent bg-accent/[0.07]">
           <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse flex-shrink-0" />
           About Me
         </span>
@@ -47,7 +47,7 @@ const IntroSection = () => {
       {/* Description */}
       <motion.p
         variants={item}
-        className="text-white/50 text-sm leading-relaxed max-w-md"
+        className="text-white/50 text-base leading-relaxed max-w-md"
       >
         {mePage.description}
       </motion.p>
@@ -60,7 +60,7 @@ const IntroSection = () => {
               <CountUp delay={0.5} end={s.value} />
               <span>+</span>
             </div>
-            <div className="text-white/40 text-xs mt-1.5">{s.label}</div>
+            <div className="text-white/40 text-sm mt-1.5">{s.label}</div>
           </div>
         ))}
       </motion.div>

@@ -25,11 +25,13 @@ const Header = () => {
       transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
       className="w-full h-14 relative z-40 flex-shrink-0"
       style={{
-        background: "rgba(7,10,22,0.82)",
-        backdropFilter: "blur(24px)",
-        WebkitBackdropFilter: "blur(24px)",
-        borderBottom: "1px solid rgba(255,255,255,0.08)",
-        boxShadow: "0 1px 32px rgba(0,0,0,0.45)",
+        background:
+          "linear-gradient(108deg, rgba(6,182,212,0.08) 0%, rgba(7,10,22,0.88) 30%, rgba(7,10,22,0.88) 70%, rgba(124,58,237,0.08) 100%)",
+        backdropFilter: "blur(28px) saturate(160%)",
+        WebkitBackdropFilter: "blur(28px) saturate(160%)",
+        borderBottom: "1px solid rgba(255,255,255,0.07)",
+        boxShadow:
+          "0 2px 40px rgba(0,0,0,0.5), 0 0 80px rgba(6,182,212,0.05), inset 0 0 60px rgba(124,58,237,0.04)",
       }}
     >
       {/* ── Top accent line cyan → violet ── */}
@@ -73,7 +75,7 @@ const Header = () => {
                 className="w-1 h-1 rounded-full flex-shrink-0"
                 style={{ background: "#06b6d4", boxShadow: "0 0 6px #06b6d4" }}
               />
-              <span className="text-[0.65rem] font-bold uppercase tracking-[0.22em] text-white/35">
+              <span className="text-[0.78rem] font-bold uppercase tracking-[0.22em] text-white/35">
                 {pageName}
               </span>
             </motion.div>
@@ -115,7 +117,7 @@ const Header = () => {
             href={homePage.cv}
             download="Ibrahim_Alia_CV.pdf"
             title="Download CV"
-            className="flex items-center gap-1.5 ml-2 px-4 py-1.5 rounded-full border border-accent/40 text-accent hover:text-[#070a16] hover:bg-accent hover:border-accent transition-all duration-200 text-xs font-bold uppercase tracking-wider"
+            className="flex items-center gap-1.5 ml-2 px-4 py-1.5 rounded-full border border-accent/40 text-accent hover:text-[#070a16] hover:bg-accent hover:border-accent transition-all duration-200 text-sm font-bold uppercase tracking-wider"
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.97 }}
             transition={{ type: "spring", stiffness: 400, damping: 22 }}

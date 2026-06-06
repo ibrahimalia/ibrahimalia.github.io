@@ -47,7 +47,7 @@ const MainLayout = () => {
       <NavBar />
 
       {/* ── Page content ── */}
-      <main className="flex-1 min-h-0 overflow-hidden">
+      <main className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden">
         <AnimatePresence mode="wait" initial={false}>
           <Outlet key={location.pathname} />
         </AnimatePresence>

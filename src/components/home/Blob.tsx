@@ -2,6 +2,14 @@ import { motion } from "framer-motion";
 import { homePage } from "@db";
 import { TiltCard } from "@components";
 
+const strengths = [
+  { name: "Component Clarity",  color: "#38bdf8", pos: { top:    "14px", left:  "6px"  }, delay: 0.9  },
+  { name: "Release Ownership",  color: "#9333ea", pos: { top:    "18px", right: "4px"  }, delay: 1.05 },
+  { name: "Design Handoff",     color: "#10b981", pos: { top:   "150px", right: "-4px" }, delay: 1.2  },
+  { name: "Perf. Mindset",      color: "#f59e0b", pos: { bottom: "52px", left:  "4px"  }, delay: 1.35 },
+  { name: "Code Review",        color: "#d946ef", pos: { bottom: "26px", right: "2px"  }, delay: 1.5  },
+];
+
 const Blob = () => {
   return (
     <TiltCard maxTilt={6} perspective={1200} className="home-card-wrapper">
@@ -12,6 +20,28 @@ const Blob = () => {
       <div className="home-deco-sq home-deco-sq-1" />
       <div className="home-deco-sq home-deco-sq-2" />
       <div className="home-deco-sq home-deco-sq-3" />
+
+      {/* Strength badges */}
+      {strengths.map((s, i) => (
+        <motion.div
+          key={s.name}
+          className="home-strength-badge"
+          style={{
+            position: "absolute",
+            ...s.pos,
+            animationDelay: `${i * 0.65}s`,
+          }}
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: s.delay, duration: 0.45, ease: [0.34, 1.56, 0.64, 1] }}
+        >
+          <span
+            className="home-strength-dot"
+            style={{ background: s.color, boxShadow: `0 0 7px ${s.color}` }}
+          />
+          <span className="home-strength-name">{s.name}</span>
+        </motion.div>
+      ))}
 
       {/* Float wrapper — continuous vertical oscillation */}
       <motion.div

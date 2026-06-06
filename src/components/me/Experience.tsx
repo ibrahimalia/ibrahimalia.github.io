@@ -23,10 +23,10 @@ const Experience = () => {
         <motion.div key={exp.company + exp.position} variants={item} className="me-timeline-item">
           <div className="me-timeline-dot" />
           <div className="me-timeline-content">
-            <div className="text-accent text-[0.7rem] font-bold uppercase tracking-wider leading-none">
+            <div className="text-accent text-[0.85rem] font-bold uppercase tracking-wider leading-none">
               {exp.company}
             </div>
-            <div className="text-white/55 text-xs mt-1.5 leading-relaxed">
+            <div className="text-white/55 text-sm mt-1.5 leading-relaxed">
               {exp.position}
             </div>
           </div>
